@@ -1,8 +1,8 @@
 function CartWidget() {
   return (
-    <span role="img" aria-label="carrito">
-      🛒
-    </span>
+    <div style={{ marginLeft: "auto" }}>
+      🛒 (0)
+    </div>
   );
 }
 

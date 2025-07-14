@@ -1,8 +1,14 @@
-function ItemListContainer({ greeting }) {
+import { useParams } from 'react-router-dom';
+import ItemList from './ItemList';
+
+function ItemListContainer() {
+  const { categoryId } = useParams();
+
   return (
-    <section>
-      <h3>{greeting}</h3>
-    </section>
+    <div style={{ padding: '1rem' }}>
+      <h2>{categoryId ? `Productos de ${categoryId}` : 'Todos los productos de SE Indumentaria y Accesorios'}</h2>
+      <ItemList categoryId={categoryId} />
+    </div>
   );
 }
 
