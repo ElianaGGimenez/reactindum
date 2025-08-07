@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Indumentaria from "./pages/Indumentaria";
 import Accesorios from "./pages/Accesorios";
 import ProductDetail from "./pages/ProductDetail";
-import Cart from "./components/Cart/Cart";
+import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import { CartProvider } from "./context/CartContext";
 

@@ -1,4 +1,4 @@
-import Item from "./ItemListContainer/Item";
+import Item from "./Item";
 
 const ItemList = ({ productos }) => {
   return (
