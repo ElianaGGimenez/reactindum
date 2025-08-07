@@ -1,0 +1,329 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  color: white;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #f7a600;
+}
+
+/* Contenido principal */
+.main-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Home - Carrusel */
+.home-container h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #222;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-card {
+  flex: 0 0 auto;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.carousel-card:hover {
+  transform: scale(1.05);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.carousel-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.carousel-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-info p {
+  font-weight: 700;
+  color: #f7a600;
+}
+
+/* Categorías: grid de productos */
+.category-container h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #222;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  padding: 0.5rem 1rem 0;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.product-card p {
+  padding: 0.5rem 1rem 1rem;
+  font-weight: 700;
+  color: #f7a600;
+}
+
+/* Scrollbar carrusel */
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #f7a600;
+  border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 4px;
+}
+
+/* Detalle producto */
+.product-detail-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+}
+
+.product-detail-image {
+  width: 50%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-detail-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-detail-info h2 {
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f7a600;
+  margin-bottom: 1.5rem;
+}
+
+.installments {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Carrito */
+
+.cart-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.1);
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-image {
+  width: 90px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 1.5rem;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h3 {
+  margin-bottom: 0.3rem;
+}
+
+.cart-item-info > div {
+  margin-top: 0.8rem;
+}
+
+.cart-item-info label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.cart-item-info select {
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  min-width: 120px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Total y cuotas */
+.cart-total {
+  margin-top: 2rem;
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.cart-cuotas {
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  color: #555;
+  font-style: italic;
+}
+
+/* Botones */
+.btn-checkout {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-checkout:hover {
+  background-color: #145214;
+}
+
+.btn-clear {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.btn-clear:hover {
+  background-color: #b71c1c;
+}
+
+.btn-finalizar {
+  background-color: #333;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.btn-finalizar:hover {
+  background-color: #555;
+}

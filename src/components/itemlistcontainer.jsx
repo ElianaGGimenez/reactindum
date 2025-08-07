@@ -1,15 +1,35 @@
-import { useParams } from 'react-router-dom';
-import ItemList from './ItemList';
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import ItemList from "./ItemList";
 
-function ItemListContainer() {
-  const { categoryId } = useParams();
+const ItemListContainer = () => {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const productosRef = collection(db, "productos");
+
+    getDocs(productosRef)
+      .then((res) => {
+        const productosFormateados = res.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProductos(productosFormateados);
+      })
+      .catch((err) => console.log("Error al traer productos:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <h2>Cargando productos...</h2>;
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2>{categoryId ? `Productos de ${categoryId}` : 'Todos los productos de SE Indumentaria y Accesorios'}</h2>
-      <ItemList categoryId={categoryId} />
+    <div>
+      <h1>Catálogo de productos</h1>
+      <ItemList productos={productos} />
     </div>
   );
-}
+};
 
 export default ItemListContainer;
