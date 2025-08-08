@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css"; // si lo tenés
-import "./store.css"; // <--- CORRECTO, porque está en src/
+import "./index.css"; 
+import "./store.css"; 
 import { CartProvider } from "./context/CartContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

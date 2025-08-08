@@ -1,72 +1,70 @@
-import { useCart } from "../context/CartContext";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { CartContext } from "../context/CartContext";
+import CartItem from "../components/CartItem";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
-  const { cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart();
-  const [cuotas, setCuotas] = useState(1);
-  const navigate = useNavigate();
+  const { cart, removeItem, clearCart, totalPrice, totalQuantity } = useContext(CartContext);
 
-  if (cartItems.length === 0) {
-    return <p style={{ textAlign: "center", marginTop: "2rem" }}>El carrito está vacío.</p>;
+  const [cuotasSeleccionadas, setCuotasSeleccionadas] = useState(1);
+
+  if (cart.length === 0) {
+    return (
+      <div className="cart-empty">
+        <h2>Tu carrito está vacío</h2>
+        <Link to="/">Volver al catálogo</Link>
+      </div>
+    );
   }
 
-  const handleCheckout = () => navigate("/checkout");
+  const maxCuotas = cart.reduce((max, item) => {
+    return Math.max(max, item.cuotas || 1);
+  }, 1);
+
+  const total = totalPrice();
+  const montoPorCuota = total / cuotasSeleccionadas;
 
   return (
     <div className="cart-container">
       <h2>Tu carrito</h2>
+      {cart.map((item) => (
+        <CartItem key={item.id} item={item} onRemove={removeItem} />
+      ))}
+      <div className="cart-summary">
+        <p>Total productos: {totalQuantity()}</p>
+        <p>Total a pagar: ${total.toFixed(2)}</p>
 
-      <button className="btn-clear" onClick={clearCart}>Vaciar carrito</button>
-
-      <div className="cart-items">
-        {cartItems.map(item => (
-          <div key={item.id} className="cart-item">
-            <img src={item.img} alt={item.nombre} className="cart-item-image" />
-            <div className="cart-item-info">
-              <h3>{item.nombre}</h3>
-              <p>Precio unitario: ${item.precio}</p>
-              <div>
-                <label>Cantidad:</label>
-                <input
-                  type="number"
-                  min="1"
-                  value={item.quantity}
-                  onChange={e => updateQuantity(item.id, Number(e.target.value))}
-                />
-              </div>
-              <p>Subtotal: ${(item.precio * item.quantity).toFixed(2)}</p>
-              <button className="btn-remove" onClick={() => removeFromCart(item.id)}>
-                Eliminar
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="cuotas-section">
-        <h3>Opciones de cuotas</h3>
-        <label>Elegir cuotas:</label>
-        <select value={cuotas} onChange={e => setCuotas(Number(e.target.value))}>
-          {[1, 3, 6, 9, 12].map(n => (
-            <option key={n} value={n}>
-              {n} {n === 1 ? "cuota sin interés" : "cuotas"}
+        <label htmlFor="cuotas-select" style={{ fontWeight: "600", marginRight: "0.5rem" }}>
+          Seleccione cuotas:
+        </label>
+        <select
+          id="cuotas-select"
+          value={cuotasSeleccionadas}
+          onChange={(e) => setCuotasSeleccionadas(Number(e.target.value))}
+          style={{
+            padding: "0.3rem 0.5rem",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            minWidth: "120px",
+            cursor: "pointer",
+            fontSize: "0.95rem",
+          }}
+        >
+          {[...Array(maxCuotas).keys()].map(i => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1} {i + 1 === 1 ? "cuota" : "cuotas"} de ${ (total / (i + 1)).toFixed(2) }
             </option>
           ))}
         </select>
-      </div>
 
-      <div className="total-section">
-        <h3>Total de la compra</h3>
-        <p>Total: <strong>${totalPrice.toFixed(2)}</strong></p>
-        <p>
-          En {cuotas} {cuotas === 1 ? "cuota" : "cuotas"} de{" "}
-          <strong>${(totalPrice / cuotas).toFixed(2)}</strong>
+        <p style={{ marginTop: "1rem", fontStyle: "italic", color: "#555" }}>
+          Monto por cuota: ${montoPorCuota.toFixed(2)}
         </p>
-        <button className="btn-checkout" onClick={handleCheckout}>
-          Finalizar compra
-        </button>
       </div>
+      <button onClick={clearCart} className="btn-clear">Vaciar carrito</button>
+      <Link to="/checkout">
+        <button className="btn-checkout">Finalizar compra</button>
+      </Link>
     </div>
   );
 }

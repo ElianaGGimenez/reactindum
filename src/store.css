@@ -1,11 +1,14 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fafafa;
   color: #333;
@@ -14,7 +17,7 @@ body {
 /* Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   background-color: #222;
   color: white;
@@ -22,33 +25,56 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  height: 60px; /* altura fija para navbar */
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
+/* placeholder para evitar que contenido quede tapado por navbar sticky */
+.navbar-placeholder {
+  height: 60px; /* igual que navbar */
 }
 
-.navbar-links a {
+/* Estilos Navbar Links (si los tenés en otro archivo, mergealos) */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
   color: white;
   text-decoration: none;
-  margin-left: 1.5rem;
   font-weight: 600;
   transition: color 0.3s;
 }
 
-.navbar-links a:hover {
+.nav-link:hover,
+.nav-link.active {
   color: #f7a600;
 }
 
-/* Contenido principal */
-.main-content {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+/* Título de la tienda */
+.store-title {
+  margin-top: 0;
+  text-align: center;
+  color: #222;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
-/* Home - Carrusel */
+/* Contenedor principal */
+.main-content {
+  width: 100%;
+  padding: 0 2rem 2rem 2rem;
+  background-color: white;
+}
+
+/* El resto de tu CSS original, sin cambios */
+.main-inner {
+  width: 100%;
+  margin: 0;
+}
+
 .home-container h2 {
   margin-bottom: 1rem;
   text-align: center;
@@ -101,7 +127,20 @@ body {
   color: #f7a600;
 }
 
-/* Categorías: grid de productos */
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #f7a600;
+  border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 4px;
+}
+
 .category-container h2 {
   margin-bottom: 1.5rem;
   text-align: center;
@@ -131,39 +170,15 @@ body {
 }
 
 .product-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  width: auto !important;
+  height: 150px !important;
+  object-fit: cover !important;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #f7a600;
+  background-color: #eee;
 }
 
-.product-card h3 {
-  padding: 0.5rem 1rem 0;
-  font-size: 1.1rem;
-  color: #222;
-}
-
-.product-card p {
-  padding: 0.5rem 1rem 1rem;
-  font-weight: 700;
-  color: #f7a600;
-}
-
-/* Scrollbar carrusel */
-.carousel::-webkit-scrollbar {
-  height: 8px;
-}
-
-.carousel::-webkit-scrollbar-thumb {
-  background: #f7a600;
-  border-radius: 4px;
-}
-
-.carousel::-webkit-scrollbar-track {
-  background: #eee;
-  border-radius: 4px;
-}
-
-/* Detalle producto */
 .product-detail-container {
   max-width: 900px;
   margin: 2rem auto;
@@ -206,8 +221,6 @@ body {
   font-style: italic;
 }
 
-/* Carrito */
-
 .cart-container {
   max-width: 900px;
   margin: 2rem auto;
@@ -223,6 +236,7 @@ body {
   margin-bottom: 2rem;
   border-bottom: 1px solid #ddd;
   padding-bottom: 1rem;
+  gap: 1rem;
 }
 
 .cart-item:last-child {
@@ -230,11 +244,14 @@ body {
 }
 
 .cart-item-image {
-  width: 90px;
-  height: 80px;
-  object-fit: cover;
+  flex-shrink: 0;
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: cover !important;
   border-radius: 6px;
   margin-right: 1.5rem;
+  border: 2px solid #f7a600;
+  background-color: #eee;
 }
 
 .cart-item-info {
@@ -263,7 +280,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Total y cuotas */
 .cart-total {
   margin-top: 2rem;
   text-align: right;
@@ -279,7 +295,6 @@ body {
   font-style: italic;
 }
 
-/* Botones */
 .btn-checkout {
   margin-top: 1.5rem;
   width: 100%;

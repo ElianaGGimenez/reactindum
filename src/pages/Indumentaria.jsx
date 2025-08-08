@@ -26,7 +26,7 @@ export default function Indumentaria() {
       <h2>Indumentaria</h2>
       <div className="product-grid">
         {indumentaria.map(item => (
-          <Link to={`/product/${item.id}`} key={item.id} className="product-card">
+          <Link to={`/producto/${item.id}`} key={item.id} className="product-card">
             <img src={item.img} alt={item.nombre} loading="lazy" />
             <h3>{item.nombre}</h3>
             <p>${item.precio}</p>

@@ -1,13 +1,11 @@
 import Item from "./Item";
 
-const ItemList = ({ productos }) => {
+export default function ItemList({ productos }) {
   return (
-    <div className="grid-productos">
-      {productos.map((prod) => (
-        <Item key={prod.id} producto={prod} />
+    <div className="product-grid">
+      {productos.map((producto) => (
+        <Item key={producto.id} producto={producto} />
       ))}
     </div>
   );
-};
-
-export default ItemList;
+}

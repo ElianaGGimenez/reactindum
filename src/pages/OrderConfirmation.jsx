@@ -7,7 +7,6 @@ const OrderConfirmation = () => {
   const { orderId, name, cart, total } = location.state || {};
 
   useEffect(() => {
-    // Redirige si alguien entra sin datos
     if (!orderId) {
       navigate("/");
     }

@@ -16,10 +16,14 @@ function App() {
       <Router>
         <div className="app">
           <header>
-            <h1 className="store-title">SE Indumentaria y Accesorios</h1>
             <Navbar />
           </header>
-          <main>
+
+          {/* Placeholder para que el contenido no quede tapado */}
+          <div className="navbar-placeholder"></div>
+
+          <main className="main-content">
+            <h1 className="store-title">SE Indumentaria y Accesorios</h1>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/indumentaria" element={<Indumentaria />} />
