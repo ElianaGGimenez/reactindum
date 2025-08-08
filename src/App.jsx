@@ -19,7 +19,6 @@ function App() {
             <Navbar />
           </header>
 
-          {/* Placeholder para que el contenido no quede tapado */}
           <div className="navbar-placeholder"></div>
 
           <main className="main-content">
